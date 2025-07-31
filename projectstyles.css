@@ -1,0 +1,16 @@
+/* styles.css */
+body {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.card {
+  border-radius: 12px;
+}
+
+h1, h2 {
+  color: #333;
+}
+
+#digit-clock {
+  font-weight: bold;
+}
