@@ -10,7 +10,7 @@ INSERT INTO users(username,password,fullname,email) VALUES ('travish111',md5('ch
 
 drop table if exists posts;
 create table posts (
-  post_id varchar(50) PRIMARY KEY,
+  post_id INT AUTO_INCREMENT PRIMARY KEY,
   title varchar(75) NOT NULL,
   content varchar(250) NOT NULL,
   timestamp DATETIME NOT NULL,
@@ -20,7 +20,7 @@ create table posts (
 
 drop table if exists comments;
 create table comments (
-  comment_id varchar(50) PRIMARY KEY,
+  comment_id INT AUTO_INCREMENT PRIMARY KEY,
   content varchar(250) NOT NULL,
   timestamp DATETIME NOT NULL,
   post_id varchar(50),
