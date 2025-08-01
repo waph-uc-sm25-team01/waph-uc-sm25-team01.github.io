@@ -1,5 +1,6 @@
 <?php
 	require "database.php";
+	require "session_auth.php";
 	
 	// CSRF token check
 	if (!isset($_POST["nocsrftoken"]) || $_POST["nocsrftoken"] !== $_SESSION["nocsrftoken"]) {
@@ -39,9 +40,6 @@
 	  header("Refresh: 0; url=projectform.php");
 	  die();
 	}
-
-	// Include session protection after login
-	require "session_auth.php";
 ?>	
 <h2> Welcome <?php echo htmlentities($_SESSION['username']); ?> !</h2>	
 <a href="changepasswordform.php">Change password</a> | <a href="manageprofileform.php">Manage profile</a> | <a href="logout.php">Logout</a>
