@@ -33,16 +33,16 @@
       <div class="mb-3">
           <label for="title" class="form-label">Title:</label>
           <input type="text" class="form-control text_field" name="title" required
-           pattern="^[a-zA-Z0-9\s'.-]{2,50}$" title="Title can contain letters, spaces, apostrophes, periods, or hyphens."
+           pattern="^[a-zA-Z0-9\s'.-]{2,75}$" title="Title can contain letters, spaces, apostrophes, periods, or hyphens."
            onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '')" /> <br>
       </div>
       
       <div class="mb-3">
-          <label for="content" class="form-label">Content:</label>
-          <input type="content" class="form-control text_field" name="content" required
-            pattern="^[\w\.-]+@[\w\.-]+\.\w{2,}$"
-            title="Title can contain letters, spaces, apostrophes, periods, or hyphens."
-            onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '')" /> <br>
+          <textarea class="form-control text_field" name="content" required
+          pattern="^[a-zA-Z0-9\s'.\-@]{2,250}$"
+          title="Content can contain letters, numbers, spaces, and punctuation."
+          onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '')"
+          rows="5"></textarea>
       </div>
   
       <input type="hidden" name="nocsrftoken" value="<?php echo $rand; ?>"/>
