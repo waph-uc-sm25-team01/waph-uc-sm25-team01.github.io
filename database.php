@@ -22,6 +22,31 @@
             return FALSE;
 	}
 
+	function manageprofile($username, $fullname, $email) {
+	    global $mysqli;
+	
+	    if (!preg_match("/^[a-zA-Z0-9\s'.\-]{2,50}$/", $fullname)) {
+	        echo "Debug> Invalid characters in fullname.";
+	        return FALSE;
+	    }
+
+	    if (!preg_match("/^[a-zA-Z0-9\s'.\-]{2,50}$/", $username)) {
+	        echo "Debug> Invalid characters in fullname.";
+	        return FALSE;
+	    }
+	
+	    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+	        echo "Debug> Invalid email format.";
+	        return FALSE;
+	    }
+	
+	    $prepared_sql = "UPDATE users SET fullname = ?, email = ? WHERE username = ?";
+	    $stmt = $mysqli->prepare($prepared_sql);
+	    $stmt->bind_param("sss", $fullname, $email, $username);
+	    if ($stmt->execute()) return TRUE;
+            return FALSE;
+	}
+
 	function addnewuser($username, $password, $fullname, $email) {
 	    global $mysqli;
 	
