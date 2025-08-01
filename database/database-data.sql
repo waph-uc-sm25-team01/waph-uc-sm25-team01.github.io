@@ -1,39 +1,43 @@
-drop table if exists users;
-create table users (
-  username varchar(75) PRIMARY KEY,
-  password varchar(100) NOT NULL,
-  fullname varchar(75) NOT NULL,
-  email varchar(100) NOT NULL
+-- Drop in tables in correct dependency order
+DROP TABLE IF EXISTS comments;
+DROP TABLE IF EXISTS posts;
+DROP TABLE IF EXISTS superusers;
+DROP TABLE IF EXISTS users;
+
+-- Now create all tables
+CREATE TABLE users (
+  username VARCHAR(75) PRIMARY KEY,
+  password VARCHAR(100) NOT NULL,
+  fullname VARCHAR(75) NOT NULL,
+  email VARCHAR(100) NOT NULL
 );
 
-INSERT INTO users(username,password,fullname,email) VALUES ('travish111',md5('changeme'),'Travis Hurst','hurstts@mail.uc.edu');
+INSERT INTO users(username,password,fullname,email)
+VALUES ('travish111', MD5('changeme'), 'Travis Hurst', 'hurstts@mail.uc.edu');
 
-drop table if exists posts;
-create table posts (
+CREATE TABLE posts (
   post_id INT AUTO_INCREMENT PRIMARY KEY,
-  title varchar(75) NOT NULL,
-  content varchar(250) NOT NULL,
+  title VARCHAR(75) NOT NULL,
+  content VARCHAR(250) NOT NULL,
   timestamp DATETIME NOT NULL,
-  owner varchar(75),
+  owner VARCHAR(75),
   FOREIGN KEY (owner) REFERENCES users(username) ON DELETE CASCADE
 );
 
-drop table if exists comments;
-create table comments (
+CREATE TABLE comments (
   comment_id INT AUTO_INCREMENT PRIMARY KEY,
-  content varchar(250) NOT NULL,
+  content VARCHAR(250) NOT NULL,
   timestamp DATETIME NOT NULL,
-  post_id varchar(50),
-  owner varchar(75),
+  post_id INT,
+  owner VARCHAR(75),
   FOREIGN KEY (post_id) REFERENCES posts(post_id) ON DELETE CASCADE,
   FOREIGN KEY (owner) REFERENCES users(username) ON DELETE CASCADE
 );
 
-drop table if exists superusers;
-create table superusers (
-  superuser_id varchar(50),
-  username varchar(75) PRIMARY KEY,
-  password varchar(100) NOT NULL,
-  fullname varchar(75) NOT NULL,
-  email varchar(100) NOT NULL
+CREATE TABLE superusers (
+  superuser_id VARCHAR(50),
+  username VARCHAR(75) PRIMARY KEY,
+  password VARCHAR(100) NOT NULL,
+  fullname VARCHAR(75) NOT NULL,
+  email VARCHAR(100) NOT NULL
 );
