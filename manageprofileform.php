@@ -6,17 +6,10 @@
   $_SESSION["nocsrftoken"] = $rand;
 
   // Fetch current profile info for the logged-in user
-    $mysqli = new mysqli('localhost', 'travish111', 'changeme', 'waph_team');
-    $current_fullname = '';
-    $current_email = '';
-    if ($mysqli->connect_errno === 0) {
-      $stmt = $mysqli->prepare("SELECT fullname, email FROM users WHERE username = ?");
-      $stmt->bind_param("s", $_SESSION["username"]);
-      $stmt->execute();
-      $stmt->bind_result($current_fullname, $current_email);
-      $stmt->fetch();
-      $stmt->close();
-    }
+  $user_details = get_userdetails();
+  $current_fullname = $user_details ? $user_details['fullname'] : '';
+  $current_email = $user_details ? $user_details['email'] : '';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
