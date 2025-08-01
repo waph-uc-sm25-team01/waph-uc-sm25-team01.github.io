@@ -42,10 +42,11 @@
 	}
 
 	$posts = get_all_posts(); // Fetch posts
-?>	
-<h2> Welcome <?php echo htmlentities($_SESSION['username']); ?> !</h2>	
-<a href="changepasswordform.php">Change password</a> | <a href="manageprofileform.php">Manage profile</a> | <a href="logout.php">Logout</a>
-<h2>Recent Posts</h2>
+	include("header.php");
+?>
+
+<!-- TODO: Add New Post button + form-->
+<h2>Posts</h2>
 <?php if (!empty($posts)): ?>
     <?php foreach ($posts as $post): ?>
         <div class="post">
