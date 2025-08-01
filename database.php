@@ -119,6 +119,53 @@
 	    }
 	}
 
+	function add_post($title, $content, $timestamp, $owner) {
+	    global $mysqli;
+	
+	    if (!preg_match("/^[a-zA-Z0-9\s'.\-@]{2,75}$/", $title)) {
+	        echo "Debug> Invalid characters in title.";
+	        return FALSE;
+	    }
+	
+	    if (!preg_match("/^[a-zA-Z0-9\s'.\-@]{2,250}$/", $content)) {
+	        echo "Debug> Invalid characters in content.";
+	        return FALSE;
+	    }
+
+	    if (!preg_match("/^[a-zA-Z0-9\s'.\-@]{2,250}$/", $owner)) {
+	        echo "Debug> Invalid characters in owner.";
+	        return FALSE;
+	    }
+	
+	    $prepared_sql = "INSERT INTO posts (title, content, timestamp, owner) VALUES (?, ?, ?, ?)";
+	    $stmt = $mysqli->prepare($prepared_sql);
+	    $stmt->bind_param("ssss", $title, $content, $timestamp, $owner);
+	
+	    if ($stmt->execute()) return TRUE;
+	    return FALSE;
+	}
+
+	function get_all_posts() {
+	    global $mysqli;
+
+	    $prepared_sql = "SELECT post_id, title, content, timestamp, owner FROM posts ORDER BY timestamp DESC";
+	    $stmt = $mysqli->prepare($prepared_sql);
+	    if (!$stmt->execute()) {
+	        return [];
+	    }
+	
+	    $result = $stmt->get_result();
+	    $posts = [];
+	
+	    while ($row = $result->fetch_assoc()) {
+	        $posts[] = $row;
+	    }
+	
+	    $stmt->close();
+	    $mysqli->close();
+	
+	    return $posts;
+	}
 
 	function sanitize_input($input, $isPassword = false) {
 	   $input = trim($input);
