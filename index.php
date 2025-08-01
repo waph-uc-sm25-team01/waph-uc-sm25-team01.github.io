@@ -45,7 +45,10 @@
 	include("header.php");
 ?>
 
-<!-- TODO: Add New Post button + form-->
+<div class="text-end mb-3">
+  <a class="btn btn-primary" href="newpost.php">+ Add New Post</a>
+</div><br>
+
 <h2>Posts</h2>
 <?php if (!empty($posts)): ?>
     <?php foreach ($posts as $post): ?>
