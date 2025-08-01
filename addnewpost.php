@@ -14,8 +14,9 @@
 	$owner = $_SESSION["username"];
 	
 	if (add_post($title, $content, $timestamp, $owner)) {
-	    echo "Post added successfully!";
+	    header("Location: index.php");
+	    exit();
 	} else {
-	    echo "Post submission failed.";
+	    echo "Post failed. <a href='index.php'>Go back</a>";
 	}
 ?>
