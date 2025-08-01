@@ -8,18 +8,14 @@
 	    die();
 	}
 
-	$username = $_SESSION["username"];
-	$fullname = sanitize_input($_POST['newfullname']);
-	$email    = sanitize_input($_POST['newemail']);
-
-	if (isset($username) && isset($fullname) && isset($email)) {
-	    if (manageprofile($username, $fullname, $email)) {
-	        echo "Profile has been changed!<br>";
-	        echo '<a href="index.php">Go to Welcome Page</a>';
-	    } else {
-	        echo "Update profile failed!";
-	    }
+	$title = sanitize_input($_POST["title"]);
+	$content = sanitize_input($_POST["content"]);
+	$timestamp = date("Y-m-d H:i:s");
+	$owner = $_SESSION["username"];
+	
+	if (add_post($title, $content, $timestamp, $owner)) {
+	    echo "Post added successfully!";
 	} else {
-	    echo "Missing or invalid input.";
+	    echo "Post submission failed.";
 	}
 ?>
