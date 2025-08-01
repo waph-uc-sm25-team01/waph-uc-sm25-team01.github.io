@@ -15,5 +15,4 @@ create table messages(
   content varchar(100) NOT NULL,
   timestamp varchar(75) NOT NULL,
   type varchar(100) NOT NULL);
-  
- -- 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
+
