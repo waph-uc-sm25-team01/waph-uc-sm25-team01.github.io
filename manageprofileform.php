@@ -1,10 +1,12 @@
 <?php
   require "session_auth.php";
+  require "database.php";
+
   $rand = bin2hex(openssl_random_pseudo_bytes(16));
   $_SESSION["nocsrftoken"] = $rand;
 
   // Fetch current profile info for the logged-in user
-    $mysqli = new mysqli('localhost', 'hurstts', 'changeme', 'waph');
+    $mysqli = new mysqli('localhost', 'travish111', 'changeme', 'waph_team');
     $current_fullname = '';
     $current_email = '';
     if ($mysqli->connect_errno === 0) {
@@ -25,7 +27,7 @@
   
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="projects/project2/projectstyles.css">
+  <link rel="stylesheet" href="styles/projectstyles.css">
 
   <script type="text/javascript">
     function displayTime() {

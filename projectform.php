@@ -7,7 +7,7 @@
   
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="projects/project2/projectstyles.css">
+  <link rel="stylesheet" href="styles/projectstyles.css">
 
   <script type="text/javascript">
     function displayTime() {

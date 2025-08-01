@@ -1,5 +1,5 @@
 <?php
-	session_set_cookie_params(15*60,"/","hurstts.waph.io",TRUE,TRUE);
+	session_set_cookie_params(15*60,"/","hwaph-team1.minifacebook.com",TRUE,TRUE);
 	session_start();
 
 	if(!isset($_SESSION['authenticated']) or $_SESSION['authenticated'] != TRUE) {

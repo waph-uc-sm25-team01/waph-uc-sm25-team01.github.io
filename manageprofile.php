@@ -1,5 +1,6 @@
 <?php
 	require "session_auth.php";
+	equire "database.php";
 	
 	// CSRF token check
 	if (!isset($_POST["nocsrftoken"]) || $_POST["nocsrftoken"] !== $_SESSION["nocsrftoken"]) {
@@ -11,12 +12,6 @@
 	$username = $_SESSION["username"];
 	$fullname = sanitize_input($_POST['newfullname']);
 	$email    = sanitize_input($_POST['newemail']);
-	
-	// Input presence check
-	if (empty($username) || empty($fullname) || empty($email)) {
-	    echo "Debug> 1 or more empty input.";
-	    exit();
-	}
 	
 	// Validate format
 	if (!preg_match("/^[a-zA-Z0-9\s'.-]{2,50}$/", $fullname)) {
@@ -48,14 +43,5 @@
 	    $stmt->bind_param("sss", $fullname, $email, $username);
 	    return $stmt->execute();
 	}
-	
-	function sanitize_input($input, $isPassword = false) {
-	    $input = trim($input);
-	    if (!$isPassword) {
-	        $input = stripslashes($input);
-	        $input = preg_replace("/[^a-zA-Z0-9\s'\.\-@]/", '', $input);
-	        $input = htmlspecialchars($input, ENT_QUOTES, 'UTF-8');
-	    }
-	    return $input;
-	}
+
 ?>
