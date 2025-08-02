@@ -1,3 +1,9 @@
+<?php
+  session_start();
+  $token = bin2hex(openssl_random_pseudo_bytes(16));
+  $_SESSION["nocsrftoken"] = $token;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,6 +54,8 @@
           <label for="password" class="form-label">Password</label>
           <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
         </div>
+
+        <input type="hidden" name="nocsrftoken" value="<?php echo $token; ?>">
 
         <button type="submit" class="btn btn-primary w-100">Login</button>
       </form>
